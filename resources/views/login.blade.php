@@ -42,7 +42,7 @@
     
            <pre class="code-block pt-5">
             &lt;article&gt;
-               <h1>Article Heading</h1>
+               <h1>LOG IN </h1>
             &lt;/article&gt;
          </pre>
        </div>

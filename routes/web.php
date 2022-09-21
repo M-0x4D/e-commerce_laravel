@@ -11,6 +11,7 @@ use App\Models\categories;
 use GuzzleHttp\Psr7\Request;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,16 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return redirect('products');
+    return view('welcome');
 });
 
 
-Route::resource('products', ProductsController::class);
+Route::middleware('auth')->group(function ()
+{
+    Route::resource('products', ProductsController::class);
 
+    # code...
+});
 Route::resource('users', UsersController::class);
 
 
@@ -69,7 +74,17 @@ Route::get('test', function () {
     $category = categories::all();
     $user = User::all();
 
-    return view('test')->with(compact('products' , 'category'));
+    
+    // if(Auth::check())
+    // {
+        return view('test')->with(compact('products' , 'category'));
+    //}
+    // else
+    // {
+        
+    //     return redirect('login');
+    // }
+    
     
 });
 
@@ -90,3 +105,7 @@ Route::get('details', function (){
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -10,6 +10,8 @@ class newcontroller extends Controller
 {
     //
 
+   public $data = array();
+
 
     public function display()
     {
@@ -36,9 +38,12 @@ class newcontroller extends Controller
 
     public function getsessiondata(Request $request)
     {
-        
+            
             $result = $request->session()->get('id');
+            
             $products = Product::all()->where('id' , $result); 
+            
+            
 
             return $products;
 
@@ -48,9 +53,15 @@ class newcontroller extends Controller
 
    public function sessionstore(Request $request , $id)
    {
+    //  array_push($data,$id);
 
-    $request->session()->put('id' , $id);
-    return $request->session()->get('id');
+    //  foreach($data as $cat)
+    //  {
+         $request->session()->put('id' , $id);
+//    }
+    
+    //return $data;
+    return redirect('test'); //$request->session()->get('id');
 
    }
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductsController;
+use App\Models\Product;
 
 
 use App\Models\User;
@@ -16,6 +17,12 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    // public function __construct() {
+    //     $this->middleware('auth');
+    //  }
+
     public function index()
     {
         //
@@ -53,11 +60,25 @@ class UsersController extends Controller
 
         // $user->save();
 
-        $prods = new ProductsController();
+        //$prods = new ProductsController();
+
+      
+            // Authentication passed...
+            // if(Auth::attempt(['email' => $request->email, 'password' => $request->password]))
+            // {
+                $products = Product::all();
+        
+                return $products ;
+            
+            //} 
+         
+        //  else {
+            
+        //     return redirect('test');
+        //  }
 
 
-
-         return redirect('products');
+         
     }
 
     /**
